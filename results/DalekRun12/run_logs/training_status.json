@@ -1,0 +1,65 @@
+{
+    "DalekBehavior": {
+        "checkpoints": [
+            {
+                "steps": 18499947,
+                "file_path": "results\\DalekRun12\\DalekBehavior\\DalekBehavior-18499947.onnx",
+                "reward": 3.7177374937704633,
+                "creation_time": 1632361357.5545,
+                "auxillary_file_paths": [
+                    "results\\DalekRun12\\DalekBehavior\\DalekBehavior-18499947.pt"
+                ]
+            },
+            {
+                "steps": 18999915,
+                "file_path": "results\\DalekRun12\\DalekBehavior\\DalekBehavior-18999915.onnx",
+                "reward": 4.911718238483775,
+                "creation_time": 1632362023.6447709,
+                "auxillary_file_paths": [
+                    "results\\DalekRun12\\DalekBehavior\\DalekBehavior-18999915.pt"
+                ]
+            },
+            {
+                "steps": 19499962,
+                "file_path": "results\\DalekRun12\\DalekBehavior\\DalekBehavior-19499962.onnx",
+                "reward": 4.33925834223628,
+                "creation_time": 1632362684.5210357,
+                "auxillary_file_paths": [
+                    "results\\DalekRun12\\DalekBehavior\\DalekBehavior-19499962.pt"
+                ]
+            },
+            {
+                "steps": 19999987,
+                "file_path": "results\\DalekRun12\\DalekBehavior\\DalekBehavior-19999987.onnx",
+                "reward": 4.899225038786729,
+                "creation_time": 1632363347.4131167,
+                "auxillary_file_paths": [
+                    "results\\DalekRun12\\DalekBehavior\\DalekBehavior-19999987.pt"
+                ]
+            },
+            {
+                "steps": 20000035,
+                "file_path": "results\\DalekRun12\\DalekBehavior\\DalekBehavior-20000035.onnx",
+                "reward": 4.254934653639793,
+                "creation_time": 1632363347.4831145,
+                "auxillary_file_paths": [
+                    "results\\DalekRun12\\DalekBehavior\\DalekBehavior-20000035.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 20000035,
+            "file_path": "results\\DalekRun12\\DalekBehavior.onnx",
+            "reward": 4.254934653639793,
+            "creation_time": 1632363347.4831145,
+            "auxillary_file_paths": [
+                "results\\DalekRun12\\DalekBehavior\\DalekBehavior-20000035.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.27.0",
+        "torch_version": "1.6.0"
+    }
+}
