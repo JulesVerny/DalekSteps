@@ -19,18 +19,20 @@ This project is based upon Ml-Agents Release 18  (Python Package 0.27.0 and Unit
 
 The Trained Brain is configured into the project, so the Unity Scene can be already be played through with the Trained Brain, without the need to perform any further python Training. 
 
-## Design Overview   ##
+## Design Overview: Observations and Actions  ##
 
-Please see the /Assets/Prefab Folder, for the DalekArena. This Prefab has the design for a Dalek Arena, including the Dalek, Agent, with the Agent Scripts etc. The Ramp Rigid body moveable GameObject, and the fixed Wall, Ground and Tardis GameObjects. Note that this DalekArena Prefab is replicated 24 Times, in the Scene to speed up Tra8ining performance.  
+Please see the /Assets/Prefab Folder, for the DalekArena. This Prefab has the design for a Dalek Arena, including the Dalek, Agent, with the Agent Scripts etc. The Ramp Rigid body moveable GameObject, and the fixed Wall, Ground and Tardis GameObjects. Note that this DalekArena Prefab is replicated 24 Times, in the Scene to speed up Training performance.  
 
 ![ScreenShot](Design.PNG)
 
-The Dalek Agent is configured with the following Obervations:
-  - Dalek Forward RayCasts, which can Detect Walls, The Ramp, Steps, Tardis (if on same level)
-  - Dalek Vector 3 Position, local relative to the Wall  
-  - Ramp Vector 3 Position local relative to the Wall
-  - Ramp float Orientation (around Y axis) 
-  - Delta Vector3 distance to Tardis 
+The Dalek Agent is configured with the following Observations:
+  - Dalek Forward RayCasts, which can Detect tagged Walls, The Ramp, Steps, Tardis (only if on higher ground level)
+  - Position of Dalek (Vector 3), local relative to the Wall  
+  - Position of Ramp (Vector 3)  local relative to the Wall
+  - Ramp Orientation (float) around Y axis 
+  - Delta Vector to Tardis  (Vector3) 
+
+Note, as per the WallJump example, the Observation Vectors and ray casts are stacked by an order of six Times, presumbably to detect motion. A Decision Requester takes actions at 5x. 
 
 The Dalek Movements are controlled with two Action Branches:
   - Rotation around Y Axis Discrete Action Branch  (0 : None, 1: Turn Left, 2: Turn Right) 
@@ -47,30 +49,30 @@ There are four Distinct Rewards
    - -2.0f Excessive Episode Length (Episode steps exceeds 6000)
    - An accumlatative -0.00025f  upon every ActionReceived 
  
-The Dalek can be manually controlled, if the Dalek Agent Behaviour is set to Heuristic, in the Agnet Behavior script. Left/Right Arrows to Rotate, and Space Bar to Move Forward.  
+The Dalek can be manually controlled, if the Dalek Agent Behaviour is set into Heuristic mode, within the Agent Behavior Component. The Manual Controls are then: Left/Right Arrows to Rotate, and Space Bar to Move Forward.  
 ## Training ##
-The Dalek Agent has been trained using the Unity-ML PPO + Curiosity algorithm. Please see the /config/DalekStairs.yaml  
+The Dalek Agent has been trained using the Unity-ML:  PPO + Curiosity Algorithm. Please see the /config/DalekStairs.yaml for details  
 
-To perform Training against the proposed /config/DalekStairs.yaml, with an appropriate pyhton mlagenst environment:  
+To perform mlagents Training within an appropriate python mlagents environment using this algorithm configuration:  
 
 (mlagents) $:> mlagents-learn config/DalekStairs.yaml  --run-id=DalekRunXX
 
 ![ScreenShot](Terminal2.PNG)
 
-This will take a long time to learn a reasonable policy. Experience suggests around 12 Million Epochs. 
+This will take a long time to learn a reasonable agent policy. Experience suggests around 12 Million Epochs, but with an initial Reward Growth around 4 Million Epochs. 
 
 ![ScreenShot](Terminal1.PNG)
 
-The initial 4 Million or so steps are mostly negative episodes, with few if any discoveries of the Postive Reward. The Environment is very Sparse. However the cumulative grows to postive around 4 Million epochs, and then from 6 Million epochs the rewards gently grows. With a Curiosity ICM component the Agent is also rewarding itslef in exploring the state space, and so the agent needs to reduce its curiosity losses (Foward and Inverse networks). These show a steady decline over 12 Million epochs.
+The initial 4 Million or so steps are mostly negative episodes, with few if any discoveries of the Positive Reward signal, since the Environment is very Sparse. However the cumulative grows towards being positive around 4 Million epochs, and then from 6 Million Epochs the rewards gently grows. With a Curiosity ICM component the Agent is also rewarding itself in exploring the state space, and so the agent needs to reduce its curiosity losses (Foward and Inverse Nueral Networks). These network show a steady loss decline over 12 Million epochs.
 
 ![ScreenShot](Learning.PNG)
 
 ## Observations and Performance ##
-- The Training Time feels a little excessive. Despite Increasing the Learning rates from the default 0.0003 to 0.00075, the Reward signals still grow very slowly in the final Training Phase.
-- There are still some skip across the gaps from Ramp to Higher Ground. The Dalek Collision Box has been reduced, and could perhaps be reduced further. But that makes the environment even more challenging
-- There are some stuck policies, The Dalek still sometiems moves he ramp towards the Left edge of the arena, where it has no reasonable access, or ability to move the ramp closer to the Wall. This is a failed scenario, and the Agent typically goes into a sulk, waits out the episiode by the repeated manoeuvres around the steps. 
+- The Training Time still feels a little excessive. Despite Increasing the Learning rates from the default 0.0003 to 0.00075, the Reward signals still grow very slowly in the final Training Phase.
+- There are still some skip across the gaps from Ramp to Higher Ground. The Dalek Collision Box has been reduced, and could perhaps be reduced further. But that makes the environment even more challenging.
+- There are some stuck scenarios in the Trained policies.  The Dalek still sometiems moves the ramp towards the Left edge of the arena, where it has no reasonable access, or ability to move the ramp closer to the Wall. This is a failed scenario, and the Agent typically goes into a sulk, waiting out the Episiode by some repeated manoeuvres around the steps. 
 
-So any suggestions or recommendations are welcome. 
+So any suggestions or recommendations on improving the performance are welcome. 
 
 Cheers
 
