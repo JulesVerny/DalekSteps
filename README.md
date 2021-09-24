@@ -6,7 +6,7 @@ The Dalek has to find a way to reach the Tardis, which is on another ground leve
 
 ![ScreenShot](Main.PNG)
 
-Please see the YouTube Video Here  https://youtu.be/xQJryatkFwA. 
+Please see the [YouTube Dalek Training Experience Video Here](https://youtu.be/xQJryatkFwA). 
 
 ## Overview    ##
 Note there is no pursuit of the Tardis pre programmed into the Dalek agent. It will only discover that this is a Positive reward objective upon a successful encounter with the Tardis object. So this is a very sparse and challenging Reward Environment. The Agent undegoes a lot of  a lot of failures (Falling off the platform, losing the ramp object etc), random movements before it discovers the positive objective to reach the Tardis, and hence on how best to achieve it. The scenarios are trained against different Dalek and Ramp random start initial positions and orientations.
