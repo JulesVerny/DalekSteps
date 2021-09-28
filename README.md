@@ -2,6 +2,8 @@
 
 This is an application of Unity ml-agents Reinforcement Learning to help a Dalek navigate as an alternative to the use of Stairs.
 
+It is a  Unity ML-Agents https://github.com/Unity-Technologies/ml-agents Environment, and a derivation from the Wall Jump examples 
+
 The Dalek has to find a way to reach the Tardis, which is on another ground level. Daleks cannot climb steps ! 
 
 ![ScreenShot](Main.PNG)
